@@ -27,8 +27,19 @@ const todosSlice = createSlice({
         state.todos.push(undo);
       }
     },
+    deleTodo: (state, action) => {
+      if (state.donelist.find((todo) => todo.id === action.payload.id)) {
+        state.donelist = state.donelist.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+      } else {
+        state.todos = state.todos.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+      }
+    },
   },
 });
 
-export const { addTodo, doneTodo, undoTodo } = todosSlice.actions;
+export const { addTodo, doneTodo, undoTodo, deleTodo } = todosSlice.actions;
 export default todosSlice.reducer;

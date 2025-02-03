@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { undoTodo } from "../slices/todosSlice";
+import { deleTodo, undoTodo } from "../slices/todosSlice";
 
 const DoneList = () => {
   const todos = useSelector((state) => state.todos.donelist);
@@ -13,7 +13,15 @@ const DoneList = () => {
             <h2>{todo.title}</h2>
             내용: {todo.body}
             <br />
-            <button>삭제하기</button>
+            <button
+              onClick={() => {
+                dispatch(
+                  deleTodo({ id: todo.id, title: todo.title, body: todo.body })
+                );
+              }}
+            >
+              삭제하기
+            </button>
             <button
               onClick={() => {
                 dispatch(
